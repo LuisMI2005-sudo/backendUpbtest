@@ -3,11 +3,14 @@ const HttpError = require('../utils/http-error');
 
 const validarId = (id) => {
     const numero = Number(id);
-    if (!Number.isInteger(numero) || numero <= 0) throw new HttpError(400, 'El id debe ser un entero positivo');
+    if (!/^\d+$/.test(String(id)) || !Number.isInteger(numero) || numero <= 0 || numero > 2147483647) throw new HttpError(400, 'El id debe ser un entero entre 1 y 2147483647');
     return numero;
 };
 
-const listar = () => productoRepository.findAll();
+const listar = (nombre) => {
+    if (nombre !== undefined && typeof nombre !== 'string') throw new HttpError(400, '"nombre" debe ser un texto');
+    return productoRepository.findAll(nombre);
+};
 
 const obtenerPorId = async (id) => {
     const producto = await productoRepository.findById(validarId(id));
@@ -20,11 +23,13 @@ const crear = (datos) => productoRepository.create(datos);
 // Actualización parcial: los campos que no se envían conservan su valor actual
 const actualizar = async (id, datos) => {
     const actual = await obtenerPorId(id);
-    return productoRepository.update(actual.id, {
+    const producto = await productoRepository.update(actual.id, {
         nombre: datos.nombre ?? actual.nombre,
         precio: datos.precio ?? actual.precio,
         stock: datos.stock ?? actual.stock,
     });
+    if (!producto) throw new HttpError(404, 'Producto no encontrado');
+    return producto;
 };
 
 const eliminar = async (id) => {

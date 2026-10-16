@@ -5,7 +5,7 @@ const { crearProductoDto, actualizarProductoDto, productoResponseDto } = require
 // por eso no hace falta try/catch aquí
 
 const listar = async (req, res) => {
-    const productos = await productoService.listar();
+    const productos = await productoService.listar(req.query.nombre);
     res.json(productos.map(productoResponseDto));
 };
 
