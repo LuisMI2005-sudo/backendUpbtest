@@ -7,7 +7,7 @@ El proyecto usa `DATABASE_URL` del archivo `.env` cuando se ejecuta fuera de Ren
 - Servicio: backendUpbtest, dentro de CertiIA / Production, en Oregon.
 - URL pública: https://backendupbtest-969u.onrender.com
 - Repositorio: LuisMI2005-sudo/backendUpbtest, rama main.
-- Build Command: `npm install`.
+- Build Command: `npm ci --omit=dev` (instalación limpia de las dependencias fijadas en package-lock.json).
 - Start Command: `npm start`.
 - Plan gratuito.
 - El registro de Render confirmó la creación de la tabla `productos` y el despliegue activo del commit 6491b6b.
@@ -25,6 +25,7 @@ El hostname interno de PostgreSQL solo se puede resolver desde la red de Render.
 - Código de salida de fallo si no se puede inicializar la tabla.
 - Carga de `.env` relativa al proyecto.
 - Eliminación de nodemon y sus dependencias de desarrollo con alertas de seguridad; `npm run dev` usa la recarga integrada de Node.
+- Archivo de versiones package-lock.json incluido para que Render instale las mismas dependencias comprobadas y descarte paquetes conservados en caché.
 
 Tras este ajuste, `npm test` pasó y `npm audit` informó cero vulnerabilidades en las dependencias instaladas.
 
