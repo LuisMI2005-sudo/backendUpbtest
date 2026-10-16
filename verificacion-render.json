@@ -1,0 +1,126 @@
+{
+  "fecha": "2026-10-16T17:35:17.581Z",
+  "baseUrl": "https://backendupbtest-969u.onrender.com",
+  "correcto": true,
+  "pruebas": [
+    {
+      "prueba": "Health check",
+      "metodo": "GET",
+      "ruta": "/",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Listar productos",
+      "metodo": "GET",
+      "ruta": "/api/productos",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Crear producto de prueba",
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 201,
+      "recibido": 201
+    },
+    {
+      "prueba": "Obtener producto",
+      "metodo": "GET",
+      "ruta": "/api/productos/1",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Actualizar producto parcialmente",
+      "metodo": "PUT",
+      "ruta": "/api/productos/1",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Verificar actualización guardada",
+      "metodo": "GET",
+      "ruta": "/api/productos/1",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Buscar por nombre sin distinguir mayúsculas",
+      "metodo": "GET",
+      "ruta": "/api/productos?nombre=diagnostico-358079a0-0fef-469f-9291-6022f4f08365",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Buscar nombre inexistente",
+      "metodo": "GET",
+      "ruta": "/api/productos?nombre=Diagnostico-358079a0-0fef-469f-9291-6022f4f08365-inexistente",
+      "esperado": 200,
+      "recibido": 200
+    },
+    {
+      "prueba": "Crear producto inválido",
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "recibido": 400
+    },
+    {
+      "prueba": "Rechazar precio fuera de rango",
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "recibido": 400
+    },
+    {
+      "prueba": "Rechazar stock fuera de rango",
+      "metodo": "POST",
+      "ruta": "/api/productos",
+      "esperado": 400,
+      "recibido": 400
+    },
+    {
+      "prueba": "Rechazar id fuera de rango",
+      "metodo": "GET",
+      "ruta": "/api/productos/2147483648",
+      "esperado": 400,
+      "recibido": 400
+    },
+    {
+      "prueba": "Rechazar id inválido",
+      "metodo": "GET",
+      "ruta": "/api/productos/abc",
+      "esperado": 400,
+      "recibido": 400
+    },
+    {
+      "prueba": "Rechazar actualización vacía",
+      "metodo": "PUT",
+      "ruta": "/api/productos/1",
+      "esperado": 400,
+      "recibido": 400
+    },
+    {
+      "prueba": "Eliminar solo el producto de prueba",
+      "metodo": "DELETE",
+      "ruta": "/api/productos/1",
+      "esperado": 204,
+      "recibido": 204
+    },
+    {
+      "prueba": "Confirmar producto eliminado",
+      "metodo": "GET",
+      "ruta": "/api/productos/1",
+      "esperado": 404,
+      "recibido": 404
+    },
+    {
+      "prueba": "Ruta inexistente",
+      "metodo": "GET",
+      "ruta": "/api/ruta-inexistente",
+      "esperado": 404,
+      "recibido": 404
+    }
+  ]
+}
